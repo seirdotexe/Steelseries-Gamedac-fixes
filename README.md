@@ -33,6 +33,8 @@ The magic setting that emulates the sound over the VAC.
 
 An example setup of VAC running on SoundSwitch. To make this work, make sure your VACs are default.
 
-# Further finetuning
+# Further possible finetuning
 
 After a Windows update/restart, your audio device will be selected to the Gamedac. To prevent this, you could create a script using [AudioDeviceCmdlets](https://github.com/frgnca/AudioDeviceCmdlets). Sadly, this project doesn't support the listen over device feature, as requested [here](https://github.com/frgnca/AudioDeviceCmdlets/issues/44). Luckily, [looped-back](https://github.com/HelloWorld017/looped-back) seems to support it so you'd have to make 2 scripts.
+
+Another point to mention is that the microphone icon will always appear in the taskbar. This doesn't seem to happen in Windows 11, though. I have no idea to hide this.
