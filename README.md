@@ -32,3 +32,7 @@ The magic setting that emulates the sound over the VAC.
 ![](https://i.ibb.co/sFrvzHz/image.png)
 
 An example setup of VAC running on SoundSwitch. To make this work, make sure your VACs are default.
+
+# Further finetuning
+
+After a Windows update/restart, your audio device will be selected to the Gamedac. To prevent this, you could create a script using [AudioDeviceCmdlets](https://github.com/frgnca/AudioDeviceCmdlets). Sadly, this project doesn't support the listen over device feature, as requested [here](https://github.com/frgnca/AudioDeviceCmdlets/issues/44). Luckily, [looped-back](https://github.com/HelloWorld017/looped-back) seems to support it so you'd have to make 2 scripts.
