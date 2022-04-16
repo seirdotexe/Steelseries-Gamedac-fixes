@@ -7,7 +7,7 @@
 
 # The issue
 
-The Gamedac suffers from bidirectional audio issues. Because of this, you can't hear certain sounds unless you're looking directly at them. This issue is persisting in a wide range of games, making them all unplayable. It seems to offucr in Unreal Engine 3/4 games, but also custom engines like Remedy's Northlight engine. I suspect that the **6-channel** setup of the Gamedac driver is the issue, and there's no other way to fix this other than using third party software.
+The Gamedac suffers from bidirectional audio issues. Because of this, you can't hear certain sounds unless you're looking directly at them. This issue is persistent in a wide range of games, making them all unplayable. It seems to occur in Unreal Engine 3/4 games the most, but also custom engines like Remedy's Northlight engine are having issues. I suspect that the **6-channel** setup of the Gamedac driver is the issue, and there's no other way to fix this other than using third party software.
 
 # The fix
 
