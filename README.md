@@ -33,6 +33,6 @@ The magic setting that emulates the sound over the VAC.
 
 An example setup of VAC running on SoundSwitch. To make this work, make sure your VACs are default.
 
-# Further possible finetuning
+# Further finetuning
 
-I wrote a script that can automatically configure your Gamedac with the VAC from Eugene Muzychenko upon startup. You can find it [here](https://gist.github.com/seirdotexe/9c5b5c45aa6ef840d231d74963a9ace0).
+Please take a look at [GamedacJS](https://github.com/seirdotexe/GamedacJS). It contains multiple scripts to improve usage with your Gamedac.
