@@ -7,7 +7,7 @@
 
 # The issue
 
-The Gamedac suffers from bidirectional audio issues. Because of this, you can't hear certain sounds unless you're looking directly at them. This issue is persistent in a wide range of games, making them all unplayable. It seems to occur in Unreal Engine 3/4 games the most, but also custom engines like Remedy's Northlight engine are having issues. I suspect that the **6-channel** setup of the Gamedac driver is the issue, and there's no other way to fix this other than using third party software.
+The Gamedac suffers from bidirectional audio issues. Because of this, you can't hear certain sounds unless you're looking directly at them. This issue is persistent in a wide range of games, making them all unplayable. It seems like it occurs in Unreal Engine 3/4 games the most, but also in custom engines like Remedy's Northlight engine. I suspect that the **6-channel** setup of the Gamedac driver is the issue, and there's no other way to fix this other than using third party software.
 
 # The fix
 
@@ -35,6 +35,36 @@ An example setup of VAC running on SoundSwitch. To make this work, make sure you
 
 # Further possible finetuning
 
-After a Windows update/restart, your audio device will be selected to the Gamedac. To prevent this, you could create a script using [AudioDeviceCmdlets](https://github.com/frgnca/AudioDeviceCmdlets). Sadly, this project doesn't support the listen over device feature, as requested [here](https://github.com/frgnca/AudioDeviceCmdlets/issues/44). Luckily, [looped-back](https://github.com/HelloWorld017/looped-back) seems to support it so you'd have to make 2 scripts.
+I wrote a script that can automatically configure your Gamedac with the VAC from Eugene Muzychenko.
+
+```js
+'use strict';
+
+//? https://github.com/HelloWorld017/looped-back
+import LoopedBack from 'looped-back';
+
+const looped = new LoopedBack();
+
+if (looped.isInitialized()) {
+  const VACMicrophone = looped.getDevices(LoopedBack.DEVICE_CAPTURE)
+    .find(({ name }) => name === 'Line 1 (Virtual Audio Cable)');
+  const VACSpeaker = looped.getDevices(LoopedBack.DEVICE_RENDER)
+    .find(({ name }) => name === 'Line 1 (Virtual Audio Cable)');
+
+  const DACMicrophone = looped.getDevices(LoopedBack.DEVICE_CAPTURE)
+    .find(({ name }) => name === 'Microphone (GameDAC Chat)');
+  const DACSpeaker = looped.getDevices(LoopedBack.DEVICE_RENDER)
+    .find(({ name }) => name === 'Speakers (GameDAC Game)');
+
+  looped.setLoopback(VACMicrophone.id, DACSpeaker.id); //? DAC speaker loops to VAC microphone
+  looped.setDefaultEndpoint(VACMicrophone.id, LoopedBack.ROLE_CONSOLE); //? VAC microphone as default device
+  looped.setDefaultEndpoint(DACMicrophone.id, LoopedBack.ROLE_COMMUNICATION); //? DAC microphone as default coms device
+
+  looped.setDefaultEndpoint(VACSpeaker.id, LoopedBack.ROLE_CONSOLE); //? VAC speaker as default device
+  looped.setDefaultEndpoint(VACSpeaker.id, LoopedBack.ROLE_COMMUNICATION); //? VAC speaker as default coms device
+
+  looped.destroy();
+}
+```
 
 Another point to mention is that the microphone icon will always appear in the taskbar. This doesn't seem to happen in Windows 11, though. I have no idea to hide this.
