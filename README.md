@@ -35,36 +35,4 @@ An example setup of VAC running on SoundSwitch. To make this work, make sure you
 
 # Further possible finetuning
 
-I wrote a script that can automatically configure your Gamedac with the VAC from Eugene Muzychenko.
-
-```js
-'use strict';
-
-//? https://github.com/HelloWorld017/looped-back
-import LoopedBack from 'looped-back';
-
-const looped = new LoopedBack();
-
-if (looped.isInitialized()) {
-  const VACMicrophone = looped.getDevices(LoopedBack.DEVICE_CAPTURE)
-    .find(({ name }) => name === 'Line 1 (Virtual Audio Cable)');
-  const VACSpeaker = looped.getDevices(LoopedBack.DEVICE_RENDER)
-    .find(({ name }) => name === 'Line 1 (Virtual Audio Cable)');
-
-  const DACMicrophone = looped.getDevices(LoopedBack.DEVICE_CAPTURE)
-    .find(({ name }) => name === 'Microphone (GameDAC Chat)');
-  const DACSpeaker = looped.getDevices(LoopedBack.DEVICE_RENDER)
-    .find(({ name }) => name === 'Speakers (GameDAC Game)');
-
-  looped.setLoopback(VACMicrophone.id, DACSpeaker.id); //? DAC speaker loops to VAC microphone
-  looped.setDefaultEndpoint(VACMicrophone.id, LoopedBack.ROLE_CONSOLE); //? VAC microphone as default device
-  looped.setDefaultEndpoint(DACMicrophone.id, LoopedBack.ROLE_COMMUNICATION); //? DAC microphone as default coms device
-
-  looped.setDefaultEndpoint(VACSpeaker.id, LoopedBack.ROLE_CONSOLE); //? VAC speaker as default device
-  looped.setDefaultEndpoint(VACSpeaker.id, LoopedBack.ROLE_COMMUNICATION); //? VAC speaker as default coms device
-
-  looped.destroy();
-}
-```
-
-Another point to mention is that the microphone icon will always appear in the taskbar. This doesn't seem to happen in Windows 11, though. I have no idea to hide this.
+I wrote a script that can automatically configure your Gamedac with the VAC from Eugene Muzychenko upon startup. You can find it [here](https://gist.github.com/seirdotexe/9c5b5c45aa6ef840d231d74963a9ace0).
